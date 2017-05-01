@@ -1,0 +1,137 @@
+{
+  "TheImage": {
+    "description": "Image of the-components",
+    "displayName": "TheImage",
+    "methods": [
+      {
+        "name": "handleLoad",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "handleError",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      }
+    ],
+    "props": {
+      "width": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Image width",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
+      },
+      "height": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
+        },
+        "required": false,
+        "description": "Image height",
+        "defaultValue": {
+          "value": "'auto'",
+          "computed": false
+        }
+      },
+      "scale": {
+        "type": {
+          "name": "enum",
+          "value": [
+            {
+              "value": "'none'",
+              "computed": false
+            },
+            {
+              "value": "'fit'",
+              "computed": false
+            },
+            {
+              "value": "'fill'",
+              "computed": false
+            }
+          ]
+        },
+        "required": false,
+        "description": "How to scale image",
+        "defaultValue": {
+          "value": "'none'",
+          "computed": false
+        }
+      },
+      "onLoad": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for load event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "onError": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for failed event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      }
+    }
+  },
+  "TheImageStyle": {
+    "description": "Style for TheImage",
+    "displayName": "TheImageStyle",
+    "methods": [],
+    "props": {
+      "options": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Style options",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      }
+    }
+  }
+}
