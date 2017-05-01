@@ -69,7 +69,8 @@ TheImageStyle.data = (options) => {
       textAlign: 'center'
     },
     '.the-image-img-failed': {
-      opacity: 0.2
+      opacity: 0,
+      visibility: 'hidden'
     },
     '&.the-image-fill': {
       '.the-image-img': {

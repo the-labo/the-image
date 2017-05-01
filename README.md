@@ -120,7 +120,7 @@ Image of the-components
 | --- | --- | ---- | ---- |
 | `width` | union  | Image width | `'auto'` |
 | `height` | union  | Image height | `'auto'` |
-| `scale` | enum  | How to scale image | `'none'` |
+| `scale` | enum  | How to scale image | `'fill'` |
 | `onLoad` | func  | Handler for load event | `null` |
 | `onError` | func  | Handler for failed event | `null` |
 | `notFoundMessage` | string  | Message when not found | `'Not Found'` |
