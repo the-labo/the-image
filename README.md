@@ -81,12 +81,15 @@ const IMAGE_URL = 'https://raw.githubusercontent.com/apeman-asset-labo/apeman-as
 
 class ExampleComponent extends React.PureComponent {
   render () {
+    const width = 120
+    const height = 120
     return (
       <div>
         <TheImageStyle/>
-        <TheImage src={IMAGE_URL}/>
-        <TheImage src={IMAGE_URL} scale='fill'/>
-        <TheImage src={IMAGE_URL} scale='fit'/>
+        <TheImage {...{ width, height }} src={IMAGE_URL} scale='none'/>
+        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fill'/>
+        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fit'/>
+        <TheImage {...{ width, height }} src={'__invalid_url__'}/>
       </div>
 
     )
@@ -120,6 +123,7 @@ Image of the-components
 | `scale` | enum  | How to scale image | `'none'` |
 | `onLoad` | func  | Handler for load event | `null` |
 | `onError` | func  | Handler for failed event | `null` |
+| `notFoundMessage` | string  | Message when not found | `'Not Found'` |
 
 ### TheImageStyle
 

@@ -27,18 +27,30 @@ TheImageStyle.defaultProps = {
 TheImageStyle.data = (options) => {
   const { ThemeValues } = TheStyle
   let {
-    overlayBackgroundColor = ThemeValues.overlayBackgroundColor
+    overlayTextColor = ThemeValues.overlayTextColor,
+    overlayBackgroundColor = ThemeValues.overlayBackgroundColor,
+    lightBackgroundColor = ThemeValues.lightBackgroundColor,
+    lightTextColor = ThemeValues.lightTextColor,
   } = options
   return asStyleData('.the-image', {
     '&': {
       position: 'relative',
-      display: 'inline-flex',
+      display: 'inline-block',
+      backgroundColor: lightBackgroundColor,
+      overflow: 'hidden'
+    },
+    '.the-image-inner': {
+      display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden'
     },
     '.the-image-spinner': {
       position: 'absolute',
       zIndex: 1,
+      color: lightTextColor,
       backgroundColor: overlayBackgroundColor,
       top: 0,
       left: 0,
@@ -46,17 +58,29 @@ TheImageStyle.data = (options) => {
       bottom: 0,
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      '.the-icon-spin': {
+        fontSize: 'larger'
+      }
     },
     '.the-image-img': {},
+    '.the-image-failed': {
+      color: lightTextColor,
+      textAlign: 'center'
+    },
+    '.the-image-img-failed': {
+      opacity: 0.2
+    },
     '&.the-image-fill': {
       '.the-image-img': {
+        objectFit: 'cover',
         minWidth: '100%',
         minHeight: '100%'
       }
     },
     '&.the-image-fit': {
       '.the-image-img': {
+        objectFit: 'scale-down',
         maxWidth: '100%',
         maxHeight: '100%'
       }

@@ -14,7 +14,7 @@ class TheImage extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
-    s.satte = {
+    s.state = {
       loading: true,
       failed: false
     }
@@ -40,15 +40,25 @@ class TheImage extends React.PureComponent {
            className={ classnames('the-image', className, `the-image-${scale}`) }
            style={{ width, height }}
       >
-        {loading && <TheIcon.Spin className='the-image-spinner'/>}
-        {failed && <span className='the-image-failed'>{notFoundMessage}</span>}
-        <img className='the-image-img'
-             src={src}
-             alt={alt}
-             onLoad={(e) => s.handleLoad(e)}
-             onError={(e) => s.handleError(e)}
-        />
-        { children }
+        <div className='the-image-inner'>
+          {loading && !failed && (
+            <div className='the-image-spinner'>
+              <TheIcon.Spin />
+            </div>
+          )}
+          {failed && <span className='the-image-failed'>{notFoundMessage}</span>}
+          <img className={classnames('the-image-img', {
+            'the-image-img-failed': failed
+          })}
+               src={src}
+               alt={alt}
+               width={width}
+               height={height}
+               onLoad={(e) => s.handleLoad(e)}
+               onError={(e) => s.handleError(e)}
+          />
+          { children }
+        </div>
       </div>
     )
   }
@@ -114,7 +124,7 @@ TheImage.propTypes = {
 TheImage.defaultProps = {
   width: 'auto',
   height: 'auto',
-  scale: 'none',
+  scale: 'fill',
   onLoad: null,
   onError: null,
   notFoundMessage: 'Not Found'

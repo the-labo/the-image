@@ -113,6 +113,17 @@
           "value": "null",
           "computed": false
         }
+      },
+      "notFoundMessage": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Message when not found",
+        "defaultValue": {
+          "value": "'Not Found'",
+          "computed": false
+        }
       }
     }
   },

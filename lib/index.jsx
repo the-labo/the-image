@@ -8,7 +8,7 @@
 import TheImage from './TheImage'
 import TheImageStyle from './TheImageStyle'
 
-export default TheDemoComponent
+export default TheImage
 
 export {
   TheImage,
