@@ -88,7 +88,7 @@
         "required": false,
         "description": "How to scale image",
         "defaultValue": {
-          "value": "'none'",
+          "value": "'fill'",
           "computed": false
         }
       },
