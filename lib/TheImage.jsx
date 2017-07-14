@@ -23,7 +23,7 @@ class TheImage extends React.PureComponent {
   render () {
     const s = this
     const { props, state } = s
-    let {
+    const {
       className,
       children,
       scale,
@@ -31,14 +31,18 @@ class TheImage extends React.PureComponent {
       height,
       src,
       alt,
+      asLink,
       notFoundMessage
     } = props
-    let { loading, failed } = state
+    const { loading, failed } = state
+    const Wrap = asLink ? (props) => (
+      <a {...props} href={src} target='_blank'>{props.children}</a>
+    ) : 'div'
     return (
-      <div { ...htmlAttributesFor(props, { except: [ 'className' ] }) }
-           { ...eventHandlersFor(props, { except: [] })}
-           className={ classnames('the-image', className, `the-image-${scale}`) }
-           style={{ width, height }}
+      <Wrap { ...htmlAttributesFor(props, { except: [ 'className' ] }) }
+            { ...eventHandlersFor(props, { except: [] })}
+            className={ classnames('the-image', className, `the-image-${scale}`) }
+            style={{ width, height }}
       >
         <div className='the-image-inner'>
           {loading && !failed && (
@@ -59,7 +63,7 @@ class TheImage extends React.PureComponent {
           />
           { children }
         </div>
-      </div>
+      </Wrap>
     )
   }
 
@@ -118,7 +122,9 @@ TheImage.propTypes = {
   /** Handler for failed event */
   onError: PropTypes.func,
   /** Message when not found */
-  notFoundMessage: PropTypes.string
+  notFoundMessage: PropTypes.string,
+  /** Render as link */
+  asLink: PropTypes.bool
 }
 
 TheImage.defaultProps = {
@@ -127,7 +133,8 @@ TheImage.defaultProps = {
   scale: 'fill',
   onLoad: null,
   onError: null,
-  notFoundMessage: 'Not Found'
+  notFoundMessage: 'Not Found',
+  asLink: false
 }
 
 TheImage.displayName = 'TheImage'

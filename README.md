@@ -90,6 +90,7 @@ class ExampleComponent extends React.PureComponent {
         <TheImage {...{ width, height }} src={IMAGE_URL} scale='fill'/>
         <TheImage {...{ width, height }} src={IMAGE_URL} scale='fit'/>
         <TheImage {...{ width, height }} src={'__invalid_url__'}/>
+        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fit' asLink/>
       </div>
 
     )
