@@ -124,6 +124,17 @@
           "value": "'Not Found'",
           "computed": false
         }
+      },
+      "asLink": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Render as link",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       }
     }
   },
