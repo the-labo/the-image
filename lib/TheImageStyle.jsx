@@ -7,10 +7,10 @@ import TheStyle from 'the-style'
 import { asStyleData } from 'the-component-util'
 
 /** Style for TheImage */
-const TheImageStyle = ({ id, className, options }) => (
-  <TheStyle { ...{ id } }
-            className={ classnames('the-image-style', className) }
-            styles={ TheImageStyle.data(options) }
+const TheImageStyle = ({id, className, options}) => (
+  <TheStyle {...{id}}
+            className={classnames('the-image-style', className)}
+            styles={TheImageStyle.data(options)}
   />
 )
 
@@ -25,7 +25,7 @@ TheImageStyle.defaultProps = {
 }
 
 TheImageStyle.data = (options) => {
-  const { ThemeValues } = TheStyle
+  const {ThemeValues} = TheStyle
   let {
     overlayTextColor = ThemeValues.overlayTextColor,
     overlayBackgroundColor = ThemeValues.overlayBackgroundColor,
@@ -43,8 +43,8 @@ TheImageStyle.data = (options) => {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%',
-      height: '100%',
+      width: 'auto',
+      height: 'auto',
       overflow: 'hidden'
     },
     '.the-image-spinner': {

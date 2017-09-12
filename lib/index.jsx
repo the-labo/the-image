@@ -1,7 +1,7 @@
 /**
  * Image of the-components
  * @module the-image
- * @version 1.1.0
+ * @version 1.1.1
  */
 'use strict'
 

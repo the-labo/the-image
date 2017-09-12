@@ -2,7 +2,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import c from 'classnames'
 import TheImageStyle from './TheImageStyle'
 import { TheIcon } from 'the-icon'
 import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
@@ -14,6 +14,7 @@ class TheImage extends React.PureComponent {
   constructor (props) {
     super(props)
     const s = this
+    s.elm = null
     s.state = {
       loading: true,
       failed: false
@@ -22,7 +23,7 @@ class TheImage extends React.PureComponent {
 
   render () {
     const s = this
-    const { props, state } = s
+    const {props, state} = s
     const {
       className,
       children,
@@ -34,34 +35,35 @@ class TheImage extends React.PureComponent {
       asLink,
       notFoundMessage
     } = props
-    const { loading, failed } = state
-    const Wrap = asLink ? (props) => (
-      <a {...props} href={src} target='_blank'>{props.children}</a>
-    ) : 'div'
+    const {loading, failed, actualWidth, actualHeight} = state
+    const Wrap = asLink ? 'a' : 'div'
+    const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
     return (
-      <Wrap { ...htmlAttributesFor(props, { except: [ 'className' ] }) }
-            { ...eventHandlersFor(props, { except: [] })}
-            className={ classnames('the-image', className, `the-image-${scale}`) }
-            style={{ width, height }}
+      <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height']})}
+            {...eventHandlersFor(props, {except: []})}
+            className={c('the-image', className, `the-image-${scale}`)}
+            style={{width, height}}
+            {...asLinkProps}
+            ref={(elm) => { s.elm = elm }}
       >
-        <div className='the-image-inner'>
+        <div className='the-image-elm'
+        >
           {loading && !failed && (
-            <div className='the-image-spinner'>
-              <TheIcon.Spin />
+            <div className='the-image-spelm'>
+              <TheIcon.Spin/>
             </div>
           )}
           {failed && <span className='the-image-failed'>{notFoundMessage}</span>}
-          <img className={classnames('the-image-img', {
+          <img className={c('the-image-img', {
             'the-image-img-failed': failed
           })}
-               src={src}
-               alt={alt}
-               width={width}
-               height={height}
+               {...{src, alt}}
+               width={actualWidth || width}
+               height={actualHeight || height}
                onLoad={(e) => s.handleLoad(e)}
                onError={(e) => s.handleError(e)}
           />
-          { children }
+          {children}
         </div>
       </Wrap>
     )
@@ -69,8 +71,8 @@ class TheImage extends React.PureComponent {
 
   componentWillReceiveProps (nextProps) {
     const s = this
-    let { src } = s.props
-    let { src: nextSrc } = s.props
+    let {src} = s.props
+    let {src: nextSrc} = s.props
     let isNewSrc = nextSrc && nextSrc !== src
     if (isNewSrc) {
       s.setState({
@@ -82,21 +84,26 @@ class TheImage extends React.PureComponent {
 
   componentWillUnmount () {
     const s = this
-    s.setState({ loading: false })
+    s.setState({loading: false})
   }
 
   handleLoad (e) {
     const s = this
-    let { onError } = s.props
+    let {onError} = s.props
     onError && onError(e)
-    s.setState({ loading: false })
+    const elmRect = s.elm && s.elm.getBoundingClientRect()
+    s.setState({
+      loading: false,
+      actualWidth: elmRect && elmRect.width,
+      actualHeight: elmRect && elmRect.height,
+    })
   }
 
   handleError (e) {
     const s = this
-    let { onLoad } = s.props
+    let {onLoad} = s.props
     onLoad && onLoad(e)
-    s.setState({ loading: true })
+    s.setState({loading: true})
   }
 }
 

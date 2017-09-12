@@ -86,11 +86,18 @@ class ExampleComponent extends React.PureComponent {
     return (
       <div>
         <TheImageStyle/>
-        <TheImage {...{ width, height }} src={IMAGE_URL} scale='none'/>
-        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fill'/>
-        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fit'/>
-        <TheImage {...{ width, height }} src={'__invalid_url__'}/>
-        <TheImage {...{ width, height }} src={IMAGE_URL} scale='fit' asLink/>
+        <TheImage {...{width, height}} src={IMAGE_URL} scale='none'/>
+        <TheImage {...{width, height}} src={IMAGE_URL} scale='fill'/>
+        <TheImage {...{width, height}} src={IMAGE_URL} scale='fit'/>
+        <TheImage {...{width, height}} src={'__invalid_url__'}/>
+        <TheImage {...{width, height}} src={IMAGE_URL} scale='fit' asLink/>
+
+        <hr/>
+        <div style={{width: 120, height: 120, background: '#CCC'}}>
+          <TheImage height="24px" width='33%' src={IMAGE_URL} scale='fill' asLink/>
+          <TheImage height="24px" width='33%' src={IMAGE_URL} scale='fill' asLink/>
+          <TheImage height="24px" width='33%' src={IMAGE_URL} scale='fill'/>
+        </div>
       </div>
 
     )
@@ -125,6 +132,7 @@ Image of the-components
 | `onLoad` | func  | Handler for load event | `null` |
 | `onError` | func  | Handler for failed event | `null` |
 | `notFoundMessage` | string  | Message when not found | `'Not Found'` |
+| `asLink` | bool  | Render as link | `false` |
 
 ### TheImageStyle
 
