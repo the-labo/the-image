@@ -50,7 +50,7 @@ class TheImage extends React.PureComponent {
         <div className='the-image-elm'
         >
           {loading && !failed && (
-            <div className='the-image-spelm'>
+            <div className='the-image-spin'>
               <TheIcon.Spin/>
             </div>
           )}
