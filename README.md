@@ -133,6 +133,7 @@ Image of the-components
 | `onError` | func  | Handler for failed event | `null` |
 | `notFoundMessage` | string  | Message when not found | `'Not Found'` |
 | `asLink` | bool  | Render as link | `false` |
+| `draggable` | bool  | Image draggable | `false` |
 
 ### TheImageStyle
 
