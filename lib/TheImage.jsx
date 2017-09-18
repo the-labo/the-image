@@ -33,6 +33,7 @@ class TheImage extends React.PureComponent {
       src,
       alt,
       asLink,
+      draggable,
       notFoundMessage
     } = props
     const {loading, failed, actualWidth, actualHeight} = state
@@ -57,7 +58,7 @@ class TheImage extends React.PureComponent {
           <img className={c('the-image-img', {
             'the-image-img-failed': failed
           })}
-               {...{src, alt}}
+               {...{src, alt, draggable}}
                width={actualWidth || width}
                height={actualHeight || height}
                onLoad={(e) => s.handleLoad(e)}
@@ -131,7 +132,9 @@ TheImage.propTypes = {
   /** Message when not found */
   notFoundMessage: PropTypes.string,
   /** Render as link */
-  asLink: PropTypes.bool
+  asLink: PropTypes.bool,
+  /** Image draggable */
+  draggable: PropTypes.bool
 }
 
 TheImage.defaultProps = {
@@ -141,7 +144,8 @@ TheImage.defaultProps = {
   onLoad: null,
   onError: null,
   notFoundMessage: 'Not Found',
-  asLink: false
+  asLink: false,
+  draggable: false
 }
 
 TheImage.displayName = 'TheImage'

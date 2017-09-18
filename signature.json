@@ -135,6 +135,17 @@
           "value": "false",
           "computed": false
         }
+      },
+      "draggable": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Image draggable",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
       }
     }
   },
