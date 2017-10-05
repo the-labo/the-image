@@ -47,6 +47,10 @@ TheImageStyle.data = (options) => {
       height: 'auto',
       overflow: 'hidden'
     },
+    '.the-image-spin': {
+      textAlign: 'center',
+      padding: '8px 0'
+    },
     '.the-image-spinner': {
       position: 'absolute',
       zIndex: 1,
