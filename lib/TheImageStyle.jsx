@@ -49,9 +49,7 @@ TheImageStyle.data = (options) => {
     },
     '.the-image-spin': {
       textAlign: 'center',
-      padding: '8px 0'
-    },
-    '.the-image-spinner': {
+      padding: '8px 0',
       position: 'absolute',
       zIndex: 1,
       color: lightTextColor,
