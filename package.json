@@ -1,6 +1,6 @@
 {
   "name": "the-image",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "Image of the-components",
   "main": "shim",
   "scripts": {
