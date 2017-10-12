@@ -27,6 +27,7 @@ class TheImage extends React.PureComponent {
     const {
       className,
       children,
+      style,
       scale,
       width,
       height,
@@ -43,7 +44,7 @@ class TheImage extends React.PureComponent {
       <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height']})}
             {...eventHandlersFor(props, {except: []})}
             className={c('the-image', className, `the-image-${scale}`)}
-            style={{width, height}}
+            style={Object.assign({}, style || {}, {width, height})}
             {...asLinkProps}
             ref={(elm) => { s.elm = elm }}
       >

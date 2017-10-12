@@ -31,7 +31,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
-    "the-component-util": "*",
+    "the-component-util": "^2.1.0",
     "the-icon": "^2.0.0",
     "the-style": "^2.0.0"
   },
@@ -46,7 +46,7 @@
     "the-script-share": "^1.0.5",
     "the-script-test": "^2.0.1",
     "the-script-update": "^1.0.0",
-    "the-templates": "*"
+    "the-templates": "^2.0.1"
   },
   "peerDependencies": {
     "react": ">=16",
