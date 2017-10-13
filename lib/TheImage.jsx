@@ -73,9 +73,9 @@ class TheImage extends React.PureComponent {
 
   componentWillReceiveProps (nextProps) {
     const s = this
-    let {src} = s.props
-    let {src: nextSrc} = s.props
-    let isNewSrc = nextSrc && nextSrc !== src
+    const {src} = s.props
+    const {src: nextSrc} = s.props
+    const isNewSrc = nextSrc && nextSrc !== src
     if (isNewSrc) {
       s.setState({
         loading: true,
