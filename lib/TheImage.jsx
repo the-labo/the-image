@@ -84,6 +84,16 @@ class TheImage extends React.PureComponent {
     }
   }
 
+  componentDidMount () {
+    const s = this
+    const {methodRef} = s.props
+    if (methodRef) {
+      methodRef({
+        resize: s.resize.bind(s)
+      })
+    }
+  }
+
   componentWillUnmount () {
     const s = this
     s.setState({loading: false})
@@ -91,21 +101,26 @@ class TheImage extends React.PureComponent {
 
   handleLoad (e) {
     const s = this
-    let {onError} = s.props
+    const {onError} = s.props
     onError && onError(e)
+    s.resize()
+  }
+
+  handleError (e) {
+    const s = this
+    const {onLoad} = s.props
+    onLoad && onLoad(e)
+    s.setState({loading: true})
+  }
+
+  resize () {
+    const s = this
     const elmRect = s.elm && s.elm.getBoundingClientRect()
     s.setState({
       loading: false,
       actualWidth: elmRect && elmRect.width,
       actualHeight: elmRect && elmRect.height,
     })
-  }
-
-  handleError (e) {
-    const s = this
-    let {onLoad} = s.props
-    onLoad && onLoad(e)
-    s.setState({loading: true})
   }
 }
 
@@ -135,7 +150,9 @@ TheImage.propTypes = {
   /** Render as link */
   asLink: PropTypes.bool,
   /** Image draggable */
-  draggable: PropTypes.bool
+  draggable: PropTypes.bool,
+  /** Ref to method bounds */
+  methodRef: PropTypes.func
 }
 
 TheImage.defaultProps = {
@@ -146,7 +163,8 @@ TheImage.defaultProps = {
   onError: null,
   notFoundMessage: 'Not Found',
   asLink: false,
-  draggable: false
+  draggable: false,
+  methodRef: () => {}
 }
 
 TheImage.displayName = 'TheImage'
