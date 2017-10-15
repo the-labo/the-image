@@ -134,6 +134,7 @@ Image of the-components
 | `notFoundMessage` | string  | Message when not found | `'Not Found'` |
 | `asLink` | bool  | Render as link | `false` |
 | `draggable` | bool  | Image draggable | `false` |
+| `methodRef` | func  | Ref to method bounds | `() => {}` |
 
 ### TheImageStyle
 

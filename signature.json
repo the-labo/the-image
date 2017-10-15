@@ -153,6 +153,17 @@
           "value": "false",
           "computed": false
         }
+      },
+      "methodRef": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Ref to method bounds",
+        "defaultValue": {
+          "value": "() => {}",
+          "computed": false
+        }
       }
     }
   },
