@@ -101,17 +101,17 @@ class TheImage extends React.PureComponent {
 
   handleLoad (e) {
     const s = this
-    const {onError} = s.props
-    onError && onError(e)
+    const {onLoad} = s.props
+    onLoad && onLoad(e)
     s.setState({loading: false})
     s.resize()
   }
 
   handleError (e) {
     const s = this
-    const {onLoad} = s.props
-    onLoad && onLoad(e)
-    s.setState({loading: true})
+    const {onError} = s.props
+    onError && onError(e)
+    s.setState({loading: false})
   }
 
   resize () {
