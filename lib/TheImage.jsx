@@ -19,6 +19,7 @@ class TheImage extends React.PureComponent {
       loading: true,
       failed: false
     }
+    s.resizeTimer = -1
   }
 
   render () {
@@ -86,23 +87,23 @@ class TheImage extends React.PureComponent {
 
   componentDidMount () {
     const s = this
-    const {methodRef} = s.props
-    if (methodRef) {
-      methodRef({
-        resize: s.resize.bind(s)
-      })
+    const {resizeInterval} = s.props
+    if (resizeInterval > 0) {
+      s.resizeTimer = setInterval(() => s.resize(), resizeInterval)
     }
   }
 
   componentWillUnmount () {
     const s = this
     s.setState({loading: false})
+    clearTimeout(s.resizeTimer)
   }
 
   handleLoad (e) {
     const s = this
     const {onError} = s.props
     onError && onError(e)
+    s.setState({loading: false})
     s.resize()
   }
 
@@ -116,10 +117,20 @@ class TheImage extends React.PureComponent {
   resize () {
     const s = this
     const elmRect = s.elm && s.elm.getBoundingClientRect()
+    const {loading, actualWidth, actualHeight} = s.state
+    if (loading) {
+      return
+    }
+
+    const newActualWidth = elmRect && elmRect.width
+    const newActualHeight = elmRect && elmRect.height
+    const skip = (actualWidth === newActualWidth) && (actualHeight === newActualHeight)
+    if (skip) {
+      return
+    }
     s.setState({
-      loading: false,
-      actualWidth: elmRect && elmRect.width,
-      actualHeight: elmRect && elmRect.height,
+      actualWidth: newActualWidth,
+      actualHeight: newActualHeight,
     })
   }
 }
@@ -151,8 +162,8 @@ TheImage.propTypes = {
   asLink: PropTypes.bool,
   /** Image draggable */
   draggable: PropTypes.bool,
-  /** Ref to method bounds */
-  methodRef: PropTypes.func
+  /** Interval for resize */
+  resizeInterval: PropTypes.number
 }
 
 TheImage.defaultProps = {
@@ -164,7 +175,7 @@ TheImage.defaultProps = {
   notFoundMessage: 'Not Found',
   asLink: false,
   draggable: false,
-  methodRef: () => {}
+  resizeInterval: -1
 }
 
 TheImage.displayName = 'TheImage'

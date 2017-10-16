@@ -93,6 +93,10 @@ class ExampleComponent extends React.PureComponent {
         <TheImage {...{width, height}} src={IMAGE_URL} scale='fit' asLink/>
 
         <hr/>
+
+        <TheImage width='30vw' height='30vh' resizeInterval={500} src={IMAGE_URL} scale='fit'/>
+
+        <hr/>
         <div style={{width: 120, height: 120, background: '#CCC'}}>
           <TheImage height="24px" width='33%' src={IMAGE_URL} scale='fill' asLink/>
           <TheImage height="24px" width='33%' src={IMAGE_URL} scale='fill' asLink/>
@@ -134,7 +138,7 @@ Image of the-components
 | `notFoundMessage` | string  | Message when not found | `'Not Found'` |
 | `asLink` | bool  | Render as link | `false` |
 | `draggable` | bool  | Image draggable | `false` |
-| `methodRef` | func  | Ref to method bounds | `() => {}` |
+| `resizeInterval` | number  | Interval for resize | `-1` |
 
 ### TheImageStyle
 

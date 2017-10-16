@@ -154,14 +154,14 @@
           "computed": false
         }
       },
-      "methodRef": {
+      "resizeInterval": {
         "type": {
-          "name": "func"
+          "name": "number"
         },
         "required": false,
-        "description": "Ref to method bounds",
+        "description": "Interval for resize",
         "defaultValue": {
-          "value": "() => {}",
+          "value": "-1",
           "computed": false
         }
       }
