@@ -65,7 +65,9 @@ TheImageStyle.data = (options) => {
         fontSize: 'larger'
       }
     },
-    '.the-image-img': {},
+    '.the-image-img': {
+      transition: 'width 300ms, height 300ms'
+    },
     '.the-image-failed': {
       color: lightTextColor,
       textAlign: 'center'
