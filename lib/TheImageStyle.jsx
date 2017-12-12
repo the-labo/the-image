@@ -66,7 +66,8 @@ TheImageStyle.data = (options) => {
       }
     },
     '.the-image-img': {
-      transition: 'width 300ms, height 300ms'
+      transition: 'width 300ms, height 300ms',
+      objectFit: 'none'
     },
     '.the-image-failed': {
       color: lightTextColor,
