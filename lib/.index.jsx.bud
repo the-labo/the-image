@@ -10,8 +10,7 @@ module.exports = [
   ...dir({
     dirname: __dirname,
     name: pkg.name,
-    description: pkg.description,
-    default: 'create'
+    description: pkg.description
   }),
   path: `${__dirname}/${filename}`
 }))
