@@ -1,8 +1,52 @@
 {
   "name": "the-image",
-  "version": "2.0.2",
   "description": "Image of the-components",
+  "version": "2.0.2",
+  "author": {
+    "name": "Taka Okunishi",
+    "email": "okunishinishi@gmail.com",
+    "url": "http://okunishitaka.com"
+  },
+  "bugs": {
+    "url": "https://github.com/the-labo/the-image/issues"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "prop-types": "^15.6.1",
+    "the-component-util": "^2.2.1",
+    "the-icon": "^4.0.4",
+    "the-style": "^2.1.0"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.0.0-beta.40",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.1.1",
+    "the-component-demo": "^4.0.6",
+    "the-script-build": "^3.1.4",
+    "the-script-doc": "^1.0.2",
+    "the-script-release": "^1.0.6",
+    "the-script-share": "^1.0.5",
+    "the-script-test": "^2.1.0",
+    "the-script-update": "^1.0.0",
+    "the-templates": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=4"
+  },
+  "homepage": "https://github.com/the-labo/the-image#readme",
+  "keywords": [
+    "react-component",
+    "the"
+  ],
+  "license": "MIT",
   "main": "shim",
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16"
+  },
+  "repository": "the-labo/the-image",
   "scripts": {
     "build": "the-script-build",
     "doc": "the-script-doc",
@@ -12,48 +56,5 @@
     "test": "the-script-test",
     "update": "the-script-update",
     "watch": "the-script-build -w"
-  },
-  "repository": "the-labo/the-image",
-  "keywords": [
-    "the",
-    "react-component"
-  ],
-  "author": {
-    "name": "Taka Okunishi",
-    "email": "okunishinishi@gmail.com",
-    "url": "http://okunishitaka.com"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/the-labo/the-image/issues"
-  },
-  "homepage": "https://github.com/the-labo/the-image#readme",
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "^15.6.0",
-    "the-component-util": "^2.1.0",
-    "the-icon": "^4.0.1",
-    "the-style": "^2.1.0"
-  },
-  "devDependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-router-dom": "^4.1.1",
-    "the-component-demo": "^4.0.2",
-    "the-script-build": "^2.0.1",
-    "the-script-doc": "^1.0.2",
-    "the-script-release": "^1.0.6",
-    "the-script-share": "^1.0.5",
-    "the-script-test": "^2.0.1",
-    "the-script-update": "^1.0.0",
-    "the-templates": "^2.1.11"
-  },
-  "peerDependencies": {
-    "react": ">=16",
-    "react-dom": ">=16"
-  },
-  "engines": {
-    "node": ">=8",
-    "npm": ">=4"
   }
 }

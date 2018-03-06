@@ -1,13 +1,13 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import TheStyle from 'the-style'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { asStyleData } from 'the-component-util'
+import TheStyle from 'the-style'
 
 /** Style for TheImage */
-const TheImageStyle = ({id, className, options}) => (
+const TheImageStyle = ({className, id, options}) => (
   <TheStyle {...{id}}
             className={classnames('the-image-style', className)}
             styles={TheImageStyle.data(options)}
@@ -17,80 +17,80 @@ const TheImageStyle = ({id, className, options}) => (
 TheImageStyle.displayName = 'TheImageStyle'
 TheImageStyle.propTypes = {
   /** Style options */
-  options: PropTypes.object
+  options: PropTypes.object,
 }
 
 TheImageStyle.defaultProps = {
-  options: {}
+  options: {},
 }
 
 TheImageStyle.data = (options) => {
   const {ThemeValues} = TheStyle
   let {
-    overlayTextColor = ThemeValues.overlayTextColor,
-    overlayBackgroundColor = ThemeValues.overlayBackgroundColor,
     lightBackgroundColor = ThemeValues.lightBackgroundColor,
     lightTextColor = ThemeValues.lightTextColor,
+    overlayBackgroundColor = ThemeValues.overlayBackgroundColor,
+    overlayTextColor = ThemeValues.overlayTextColor,
   } = options
   return asStyleData('.the-image', {
-    '&': {
-      position: 'relative',
-      display: 'inline-block',
-      backgroundColor: lightBackgroundColor,
-      overflow: 'hidden'
-    },
-    '.the-image-inner': {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 'auto',
-      height: 'auto',
-      overflow: 'hidden'
-    },
-    '.the-image-spin': {
-      textAlign: 'center',
-      padding: '8px 0',
-      position: 'absolute',
-      zIndex: 1,
-      color: lightTextColor,
-      backgroundColor: overlayBackgroundColor,
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      '.the-icon-spin': {
-        fontSize: 'larger'
-      }
-    },
-    '.the-image-img': {
-      transition: 'width 300ms, height 300ms',
-      objectFit: 'none'
-    },
     '.the-image-failed': {
       color: lightTextColor,
-      textAlign: 'center'
+      textAlign: 'center',
+    },
+    '.the-image-img': {
+      objectFit: 'none',
+      transition: 'width 300ms, height 300ms',
     },
     '.the-image-img-failed': {
       opacity: 0,
-      visibility: 'hidden'
+      visibility: 'hidden',
+    },
+    '.the-image-inner': {
+      alignItems: 'center',
+      display: 'flex',
+      height: 'auto',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      width: 'auto',
+    },
+    '.the-image-spin': {
+      '.the-icon-spin': {
+        fontSize: 'larger',
+      },
+      alignItems: 'center',
+      backgroundColor: overlayBackgroundColor,
+      bottom: 0,
+      color: lightTextColor,
+      display: 'flex',
+      justifyContent: 'center',
+      left: 0,
+      padding: '8px 0',
+      position: 'absolute',
+      right: 0,
+      textAlign: 'center',
+      top: 0,
+      zIndex: 1,
+    },
+    '&': {
+      backgroundColor: lightBackgroundColor,
+      display: 'inline-block',
+      overflow: 'hidden',
+      position: 'relative',
     },
     '&.the-image-fill': {
       '.the-image-img': {
-        objectFit: 'cover',
+        minHeight: '100%',
         minWidth: '100%',
-        minHeight: '100%'
-      }
+        objectFit: 'cover',
+      },
     },
     '&.the-image-fit': {
       '.the-image-img': {
-        objectFit: 'scale-down',
+        maxHeight: '100%',
         maxWidth: '100%',
-        maxHeight: '100%'
-      }
-    }
+        objectFit: 'scale-down',
+      },
+    },
   })
 }
 

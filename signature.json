@@ -4,7 +4,7 @@
     "displayName": "TheImage",
     "methods": [
       {
-        "name": "handleLoad",
+        "name": "handleError",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -16,7 +16,7 @@
         "returns": null
       },
       {
-        "name": "handleError",
+        "name": "handleLoad",
         "docblock": null,
         "modifiers": [],
         "params": [
@@ -36,22 +36,25 @@
       }
     ],
     "props": {
-      "width": {
+      "asLink": {
         "type": {
-          "name": "union",
-          "value": [
-            {
-              "name": "string"
-            },
-            {
-              "name": "number"
-            }
-          ]
+          "name": "bool"
         },
         "required": false,
-        "description": "Image width",
+        "description": "Render as link",
         "defaultValue": {
-          "value": "'auto'",
+          "value": "false",
+          "computed": false
+        }
+      },
+      "draggable": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Image draggable",
+        "defaultValue": {
+          "value": "false",
           "computed": false
         }
       },
@@ -71,6 +74,50 @@
         "description": "Image height",
         "defaultValue": {
           "value": "'auto'",
+          "computed": false
+        }
+      },
+      "notFoundMessage": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Message when not found",
+        "defaultValue": {
+          "value": "'Not Found'",
+          "computed": false
+        }
+      },
+      "onError": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for failed event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "onLoad": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Handler for load event",
+        "defaultValue": {
+          "value": "null",
+          "computed": false
+        }
+      },
+      "resizeInterval": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Interval for resize",
+        "defaultValue": {
+          "value": "-1",
           "computed": false
         }
       },
@@ -99,69 +146,28 @@
           "computed": false
         }
       },
-      "onLoad": {
+      "width": {
         "type": {
-          "name": "func"
+          "name": "union",
+          "value": [
+            {
+              "name": "string"
+            },
+            {
+              "name": "number"
+            }
+          ]
         },
         "required": false,
-        "description": "Handler for load event",
+        "description": "",
         "defaultValue": {
-          "value": "null",
+          "value": "'auto'",
           "computed": false
         }
       },
-      "onError": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "Handler for failed event",
+      "role": {
         "defaultValue": {
-          "value": "null",
-          "computed": false
-        }
-      },
-      "notFoundMessage": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Message when not found",
-        "defaultValue": {
-          "value": "'Not Found'",
-          "computed": false
-        }
-      },
-      "asLink": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "Render as link",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      },
-      "draggable": {
-        "type": {
-          "name": "bool"
-        },
-        "required": false,
-        "description": "Image draggable",
-        "defaultValue": {
-          "value": "false",
-          "computed": false
-        }
-      },
-      "resizeInterval": {
-        "type": {
-          "name": "number"
-        },
-        "required": false,
-        "description": "Interval for resize",
-        "defaultValue": {
-          "value": "-1",
+          "value": "'image'",
           "computed": false
         }
       }

@@ -1,11 +1,11 @@
 'use strict'
 
-import React from 'react'
-import PropTypes from 'prop-types'
 import c from 'classnames'
-import TheImageStyle from './TheImageStyle'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
+import TheImageStyle from './TheImageStyle'
 
 /**
  * Image of the-components
@@ -13,58 +13,95 @@ import { htmlAttributesFor, eventHandlersFor } from 'the-component-util'
 class TheImage extends React.PureComponent {
   constructor (props) {
     super(props)
-    const s = this
-    s.elm = null
-    s.state = {
+    this.elm = null
+    this.state = {
+      failed: false,
       loading: true,
-      failed: false
     }
-    s.resizeTimer = -1
+    this.resizeTimer = -1
+  }
+
+  componentDidMount () {
+    const {resizeInterval} = this.props
+    if (resizeInterval > 0) {
+      this.resizeTimer = setInterval(() => this.resize(), resizeInterval)
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const {src} = this.props
+    const {src: nextSrc} = this.props
+    const isNewSrc = nextSrc && nextSrc !== src
+    if (isNewSrc) {
+      this.setState({
+        failed: false,
+        loading: true,
+      })
+    }
+  }
+
+  componentWillUnmount () {
+    this.setState({loading: false})
+    clearTimeout(this.resizeTimer)
+  }
+
+  handleError (e) {
+    const {onError} = this.props
+    onError && onError(e)
+    this.setState({loading: false})
+  }
+
+  handleLoad (e) {
+    const {onLoad} = this.props
+    onLoad && onLoad(e)
+    this.setState({loading: false})
+    this.resize()
   }
 
   render () {
-    const s = this
-    const {props, state} = s
+    const {props, state} = this
     const {
-      className,
-      children,
-      style,
-      scale,
-      width,
-      height,
-      src,
       alt,
       asLink,
+      children,
+      className,
       draggable,
-      notFoundMessage
+      height,
+      notFoundMessage,
+      scale,
+      src,
+      style,
+      width,
     } = props
-    const {loading, failed, actualWidth, actualHeight} = state
+    const {actualHeight, actualWidth, failed, loading} = state
     const Wrap = asLink ? 'a' : 'div'
     const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
+    const spinning = loading && !failed
     return (
       <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height']})}
             {...eventHandlersFor(props, {except: []})}
             className={c('the-image', className, `the-image-${scale}`)}
-            style={Object.assign({}, style || {}, {width, height})}
+            style={Object.assign({}, style || {}, {height, width})}
             {...asLinkProps}
-            ref={(elm) => { s.elm = elm }}
+            aria-busy={spinning}
+            ref={(elm) => { this.elm = elm }}
       >
         <div className='the-image-elm'
         >
-          {loading && !failed && (
+          {spinning && (
             <div className='the-image-spin'>
               <TheIcon.Spin/>
             </div>
           )}
           {failed && <span className='the-image-failed'>{notFoundMessage}</span>}
           <img className={c('the-image-img', {
-            'the-image-img-failed': failed
+            'the-image-img-failed': failed,
           })}
-               {...{src, alt, draggable}}
-               width={actualWidth || width}
+               {...{alt, draggable, src}}
                height={actualHeight || height}
-               onLoad={(e) => s.handleLoad(e)}
-               onError={(e) => s.handleError(e)}
+               onError={(e) => this.handleError(e)}
+               onLoad={(e) => this.handleLoad(e)}
+               width={actualWidth || width}
           />
           {children}
         </div>
@@ -72,52 +109,10 @@ class TheImage extends React.PureComponent {
     )
   }
 
-  componentWillReceiveProps (nextProps) {
-    const s = this
-    const {src} = s.props
-    const {src: nextSrc} = s.props
-    const isNewSrc = nextSrc && nextSrc !== src
-    if (isNewSrc) {
-      s.setState({
-        loading: true,
-        failed: false
-      })
-    }
-  }
-
-  componentDidMount () {
-    const s = this
-    const {resizeInterval} = s.props
-    if (resizeInterval > 0) {
-      s.resizeTimer = setInterval(() => s.resize(), resizeInterval)
-    }
-  }
-
-  componentWillUnmount () {
-    const s = this
-    s.setState({loading: false})
-    clearTimeout(s.resizeTimer)
-  }
-
-  handleLoad (e) {
-    const s = this
-    const {onLoad} = s.props
-    onLoad && onLoad(e)
-    s.setState({loading: false})
-    s.resize()
-  }
-
-  handleError (e) {
-    const s = this
-    const {onError} = s.props
-    onError && onError(e)
-    s.setState({loading: false})
-  }
-
   resize () {
     const s = this
     const elmRect = s.elm && s.elm.getBoundingClientRect()
-    const {loading, actualWidth, actualHeight} = s.state
+    const {actualHeight, actualWidth, loading} = s.state
     if (loading) {
       return
     }
@@ -129,8 +124,8 @@ class TheImage extends React.PureComponent {
       return
     }
     s.setState({
-      actualWidth: newActualWidth,
       actualHeight: newActualHeight,
+      actualWidth: newActualWidth,
     })
   }
 }
@@ -139,43 +134,44 @@ TheImage.Style = TheImageStyle
 
 TheImage.propTypes = {
   /** Image width */
-  width: PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number
-  ]),
+  /** Render as link */
+  asLink: PropTypes.bool,
+  /** Image draggable */
+  draggable: PropTypes.bool,
   /** Image height */
   height: PropTypes.oneOfType([
     PropTypes.string, PropTypes.number
   ]),
+  /** Message when not found */
+  notFoundMessage: PropTypes.string,
+  /** Handler for failed event */
+  onError: PropTypes.func,
+  /** Handler for load event */
+  onLoad: PropTypes.func,
+  /** Interval for resize */
+  resizeInterval: PropTypes.number,
   /** How to scale image */
   scale: PropTypes.oneOf([
     'none',
     'fit',
     'fill'
   ]),
-  /** Handler for load event */
-  onLoad: PropTypes.func,
-  /** Handler for failed event */
-  onError: PropTypes.func,
-  /** Message when not found */
-  notFoundMessage: PropTypes.string,
-  /** Render as link */
-  asLink: PropTypes.bool,
-  /** Image draggable */
-  draggable: PropTypes.bool,
-  /** Interval for resize */
-  resizeInterval: PropTypes.number
+  width: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number
+  ]),
 }
 
 TheImage.defaultProps = {
-  width: 'auto',
-  height: 'auto',
-  scale: 'fill',
-  onLoad: null,
-  onError: null,
-  notFoundMessage: 'Not Found',
   asLink: false,
   draggable: false,
-  resizeInterval: -1
+  height: 'auto',
+  notFoundMessage: 'Not Found',
+  onError: null,
+  onLoad: null,
+  resizeInterval: -1,
+  role: 'image',
+  scale: 'fill',
+  width: 'auto',
 }
 
 TheImage.displayName = 'TheImage'

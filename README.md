@@ -130,15 +130,16 @@ Image of the-components
 
 | Name | Type | Description | Default |
 | --- | --- | ---- | ---- |
-| `width` | union  | Image width | `'auto'` |
-| `height` | union  | Image height | `'auto'` |
-| `scale` | enum  | How to scale image | `'fill'` |
-| `onLoad` | func  | Handler for load event | `null` |
-| `onError` | func  | Handler for failed event | `null` |
-| `notFoundMessage` | string  | Message when not found | `'Not Found'` |
 | `asLink` | bool  | Render as link | `false` |
 | `draggable` | bool  | Image draggable | `false` |
+| `height` | union  | Image height | `'auto'` |
+| `notFoundMessage` | string  | Message when not found | `'Not Found'` |
+| `onError` | func  | Handler for failed event | `null` |
+| `onLoad` | func  | Handler for load event | `null` |
 | `resizeInterval` | number  | Interval for resize | `-1` |
+| `scale` | enum  | How to scale image | `'fill'` |
+| `width` | union  |  | `'auto'` |
+| `role` |   |  | `'image'` |
 
 ### TheImageStyle
 
