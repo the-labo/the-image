@@ -76,7 +76,7 @@ class TheImage extends React.PureComponent {
     const {actualHeight, actualWidth, failed, loading} = state
     const Wrap = asLink ? 'a' : 'div'
     const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
-    const spinning = loading && !failed
+    const spinning = !!src && loading && !failed
     return (
       <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height']})}
             {...eventHandlersFor(props, {except: []})}
