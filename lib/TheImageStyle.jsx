@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { asStyleData } from 'the-component-util'
-import TheStyle from 'the-style'
+import { TheStyle } from 'the-style'
 
 /** Style for TheImage */
 const TheImageStyle = ({className, id, options}) => (
