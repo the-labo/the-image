@@ -4,15 +4,15 @@ const pkg = require('../package.json')
 const {dir} = require('the-templates')
 
 module.exports = [
-  'index.jsx',
-  'index.mjs'
-].map((filename) => ({
+  '.jsx',
+].map((ext) => ({
   ...dir({
+    cjs: false,
     dirname: __dirname,
     name: pkg.name,
-    description: pkg.description
-  }),
-  path: `${__dirname}/${filename}`
+    description: pkg.description,
+    ext
+  })
 }))
 
 if (!module.parent) {
