@@ -10,10 +10,10 @@ import TheImageStyle from './TheImageStyle'
 /**
  * Image of the-components
  */
-class TheImage extends React.PureComponent {
+class TheImage extends React.Component {
   constructor (props) {
     super(props)
-    this.elm = null
+    this.elmRef = React.createRef()
     this.state = {
       failed: false,
       loading: true,
@@ -78,13 +78,13 @@ class TheImage extends React.PureComponent {
     const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
     const spinning = !!src && loading && !failed
     return (
-      <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height']})}
+      <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height', 'src', 'draggable']})}
             {...eventHandlersFor(props, {except: []})}
             className={c('the-image', className, `the-image-${scale}`)}
             style={Object.assign({}, style || {}, {height, width})}
             {...asLinkProps}
             aria-busy={spinning}
-            ref={(elm) => { this.elm = elm }}
+            ref={this.elmRef}
       >
         <div className='the-image-elm'
         >
@@ -110,9 +110,12 @@ class TheImage extends React.PureComponent {
   }
 
   resize () {
-    const s = this
-    const elmRect = s.elm && s.elm.getBoundingClientRect()
-    const {actualHeight, actualWidth, loading} = s.state
+    const elm = this.elmRef.current
+    if (!elm) {
+      return
+    }
+    const elmRect = elm.getBoundingClientRect()
+    const {actualHeight, actualWidth, loading} = this.state
     if (loading) {
       return
     }
@@ -123,7 +126,7 @@ class TheImage extends React.PureComponent {
     if (skip) {
       return
     }
-    s.setState({
+    this.setState({
       actualHeight: newActualHeight,
       actualWidth: newActualWidth,
     })
