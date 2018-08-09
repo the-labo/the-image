@@ -9,7 +9,6 @@ import TheImage from './TheImage'
 import TheImageStyle from './TheImageStyle'
 
 export {
-  TheImage,
-  TheImageStyle,
+ TheImage,
+ TheImageStyle,
 }
-

@@ -18,13 +18,14 @@ class TheImage extends React.Component {
       failed: false,
       loading: true,
     }
+    this.resize = this.resize.bind(this)
     this.resizeTimer = -1
   }
 
   componentDidMount () {
     const {resizeInterval} = this.props
     if (resizeInterval > 0) {
-      this.resizeTimer = setInterval(() => this.resize(), resizeInterval)
+      this.resizeTimer = setInterval(this.resize, resizeInterval)
     }
   }
 
