@@ -19,6 +19,8 @@ class TheImage extends React.Component {
       loading: true,
     }
     this.resize = this.resize.bind(this)
+    this.handleError = this.handleError.bind(this)
+    this.handleLoad = this.handleLoad.bind(this)
     this.resizeTimer = -1
   }
 
@@ -100,8 +102,8 @@ class TheImage extends React.Component {
           })}
                {...{alt, draggable, src}}
                height={actualHeight || height}
-               onError={(e) => this.handleError(e)}
-               onLoad={(e) => this.handleLoad(e)}
+               onError={this.handleError}
+               onLoad={this.handleLoad}
                width={actualWidth || width}
           />
           {children}
