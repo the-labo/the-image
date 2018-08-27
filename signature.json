@@ -165,6 +165,12 @@
           "computed": false
         }
       },
+      "background": {
+        "defaultValue": {
+          "value": "'transparent'",
+          "computed": false
+        }
+      },
       "role": {
         "defaultValue": {
           "value": "'image'",

@@ -33,10 +33,6 @@ TheImageStyle.data = (options) => {
     overlayTextColor = ThemeValues.overlayTextColor,
   } = options
   return asStyleData('.the-image', {
-    '.the-image-failed': {
-      color: lightTextColor,
-      textAlign: 'center',
-    },
     '.the-image-img': {
       objectFit: 'none',
       transition: 'width 300ms, height 300ms',
@@ -48,10 +44,15 @@ TheImageStyle.data = (options) => {
     '.the-image-inner': {
       alignItems: 'center',
       display: 'flex',
-      height: 'auto',
+      height: 'inherit',
       justifyContent: 'center',
       overflow: 'hidden',
       width: 'auto',
+    },
+    '.the-image-notfound': {
+      color: lightTextColor,
+      display: 'block',
+      textAlign: 'center',
     },
     '.the-image-spin': {
       '.the-icon-spin': {
@@ -72,7 +73,6 @@ TheImageStyle.data = (options) => {
       zIndex: 1,
     },
     '&': {
-      backgroundColor: lightBackgroundColor,
       display: 'inline-block',
       overflow: 'hidden',
       position: 'relative',

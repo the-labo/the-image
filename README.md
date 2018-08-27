@@ -134,6 +134,7 @@ Image of the-components
 | `resizeInterval` | number  | Interval for resize | `-1` |
 | `scale` | enum  | How to scale image | `'fill'` |
 | `width` | union  |  | `'auto'` |
+| `background` |   |  | `'transparent'` |
 | `role` |   |  | `'image'` |
 
 ### TheImageStyle

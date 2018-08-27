@@ -51,7 +51,7 @@ class TheImage extends React.Component {
   handleError (e) {
     const {onError} = this.props
     onError && onError(e)
-    this.setState({loading: false})
+    this.setState({failed: true, loading: false})
   }
 
   handleLoad (e) {
@@ -66,6 +66,7 @@ class TheImage extends React.Component {
     const {
       alt,
       asLink,
+      background,
       children,
       className,
       draggable,
@@ -80,32 +81,36 @@ class TheImage extends React.Component {
     const Wrap = asLink ? 'a' : 'div'
     const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
     const spinning = !!src && loading && !failed
+    const notFound = !loading && (failed || !src)
     return (
       <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height', 'src', 'draggable']})}
             {...eventHandlersFor(props, {except: []})}
             className={c('the-image', className, `the-image-${scale}`)}
-            style={Object.assign({}, style || {}, {height, width})}
+            style={Object.assign({}, style || {}, {background, height, width})}
             {...asLinkProps}
             aria-busy={spinning}
             ref={this.elmRef}
       >
-        <div className='the-image-elm'
+        <div className='the-image-inner'
         >
           {spinning && (
             <div className='the-image-spin'>
               <TheIcon.Spin/>
             </div>
           )}
-          {failed && <span className='the-image-failed'>{notFoundMessage}</span>}
-          <img className={c('the-image-img', {
-            'the-image-img-failed': failed,
-          })}
-               {...{alt, draggable, src}}
-               height={actualHeight || height}
-               onError={this.handleError}
-               onLoad={this.handleLoad}
-               width={actualWidth || width}
-          />
+          {notFound ? (
+            <span className='the-image-notfound'>{notFoundMessage}</span>
+          ) : (
+            <img className={c('the-image-img', {
+              'the-image-img-failed': failed,
+            })}
+                 {...{alt, draggable, src}}
+                 height={actualHeight || height}
+                 onError={this.handleError}
+                 onLoad={this.handleLoad}
+                 width={actualWidth || width}
+            />
+          )}
           {children}
         </div>
       </Wrap>
@@ -169,6 +174,7 @@ TheImage.propTypes = {
 
 TheImage.defaultProps = {
   asLink: false,
+  background: 'transparent',
   draggable: false,
   height: 'auto',
   notFoundMessage: 'Not Found',
