@@ -7,8 +7,8 @@ import { asStyleData } from 'the-component-util'
 import { TheStyle } from 'the-style'
 
 /** Style for TheImage */
-const TheImageStyle = ({className, id, options}) => (
-  <TheStyle {...{id}}
+const TheImageStyle = ({ className, id, options }) => (
+  <TheStyle {...{ id }}
             className={classnames('the-image-style', className)}
             styles={TheImageStyle.data(options)}
   />
@@ -25,7 +25,7 @@ TheImageStyle.defaultProps = {
 }
 
 TheImageStyle.data = (options) => {
-  const {ThemeValues} = TheStyle
+  const { ThemeValues } = TheStyle
   let {
     lightBackgroundColor = ThemeValues.lightBackgroundColor,
     lightTextColor = ThemeValues.lightTextColor,

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { eventHandlersFor, htmlAttributesFor } from 'the-component-util'
 import { TheIcon } from 'the-icon'
-import TheImageStyle from './TheImageStyle'
 
 /**
  * Image of the-components
@@ -25,15 +24,15 @@ class TheImage extends React.Component {
   }
 
   componentDidMount () {
-    const {resizeInterval} = this.props
+    const { resizeInterval } = this.props
     if (resizeInterval > 0) {
       this.resizeTimer = setInterval(this.resize, resizeInterval)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    const {src} = this.props
-    const {src: nextSrc} = this.props
+    const { src } = this.props
+    const { src: nextSrc } = this.props
     const isNewSrc = nextSrc && nextSrc !== src
     if (isNewSrc) {
       this.setState({
@@ -44,25 +43,25 @@ class TheImage extends React.Component {
   }
 
   componentWillUnmount () {
-    this.setState({loading: false})
+    this.setState({ loading: false })
     clearTimeout(this.resizeTimer)
   }
 
   handleError (e) {
-    const {onError} = this.props
+    const { onError } = this.props
     onError && onError(e)
-    this.setState({failed: true, loading: false})
+    this.setState({ failed: true, loading: false })
   }
 
   handleLoad (e) {
-    const {onLoad} = this.props
+    const { onLoad } = this.props
     onLoad && onLoad(e)
-    this.setState({loading: false})
+    this.setState({ loading: false })
     this.resize()
   }
 
   render () {
-    const {props, state} = this
+    const { props, state } = this
     const {
       alt,
       asLink,
@@ -77,16 +76,16 @@ class TheImage extends React.Component {
       style,
       width,
     } = props
-    const {actualHeight, actualWidth, failed, loading} = state
+    const { actualHeight, actualWidth, failed, loading } = state
     const Wrap = asLink ? 'a' : 'div'
-    const asLinkProps = asLink ? {href: src, target: '_blank'} : {}
+    const asLinkProps = asLink ? { href: src, target: '_blank' } : {}
     const spinning = !!src && loading && !failed
     const notFound = !loading && (failed || !src)
     return (
-      <Wrap {...htmlAttributesFor(props, {except: ['className', 'width', 'height', 'src', 'draggable']})}
-            {...eventHandlersFor(props, {except: []})}
+      <Wrap {...htmlAttributesFor(props, { except: ['className', 'width', 'height', 'src', 'draggable'] })}
+            {...eventHandlersFor(props, { except: [] })}
             className={c('the-image', className, `the-image-${scale}`)}
-            style={Object.assign({}, style || {}, {background, height, width})}
+            style={Object.assign({}, style || {}, { background, height, width })}
             {...asLinkProps}
             aria-busy={spinning}
             ref={this.elmRef}
@@ -104,7 +103,7 @@ class TheImage extends React.Component {
             <img className={c('the-image-img', {
               'the-image-img-failed': failed,
             })}
-                 {...{alt, draggable, src}}
+                 {...{ alt, draggable, src }}
                  height={actualHeight || height}
                  onError={this.handleError}
                  onLoad={this.handleLoad}
@@ -123,7 +122,7 @@ class TheImage extends React.Component {
       return
     }
     const elmRect = elm.getBoundingClientRect()
-    const {actualHeight, actualWidth, loading} = this.state
+    const { actualHeight, actualWidth, loading } = this.state
     if (loading) {
       return
     }
@@ -140,8 +139,6 @@ class TheImage extends React.Component {
     })
   }
 }
-
-TheImage.Style = TheImageStyle
 
 TheImage.propTypes = {
   /** Image width */
