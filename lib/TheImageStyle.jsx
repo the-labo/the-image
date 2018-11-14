@@ -32,7 +32,12 @@ TheImageStyle.data = (options) => {
     overlayBackgroundColor = ThemeValues.overlayBackgroundColor,
     overlayTextColor = ThemeValues.overlayTextColor,
   } = options
-  return asStyleData('.the-image', {
+  return asStyleData({
+    '.the-image': {
+      display: 'inline-block',
+      overflow: 'hidden',
+      position: 'relative',
+    },
     '.the-image-img': {
       objectFit: 'none',
       transition: 'width 300ms, height 300ms',
@@ -72,12 +77,7 @@ TheImageStyle.data = (options) => {
       top: 0,
       zIndex: 1,
     },
-    '&': {
-      display: 'inline-block',
-      overflow: 'hidden',
-      position: 'relative',
-    },
-    '&.the-image-fill': {
+    '.the-image.the-image-fill': {
       '.the-image-img': {
         boxSizing: 'border-box',
         minHeight: '100%',
@@ -85,7 +85,7 @@ TheImageStyle.data = (options) => {
         objectFit: 'cover',
       },
     },
-    '&.the-image-fit': {
+    '.the-image.the-image-fit': {
       '.the-image-img': {
         maxHeight: '100%',
         maxWidth: '100%',
