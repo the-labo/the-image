@@ -49,7 +49,7 @@ TheImageStyle.data = (options) => {
     '.the-image-inner': {
       alignItems: 'center',
       display: 'flex',
-      height: 'inherit',
+      height: 'fit-content',
       justifyContent: 'center',
       overflow: 'hidden',
       width: 'auto',
