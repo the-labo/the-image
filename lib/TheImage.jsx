@@ -10,7 +10,7 @@ import { TheIcon } from 'the-icon'
  * Image of the-components
  */
 class TheImage extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.elmRef = React.createRef()
     this.state = {
@@ -23,17 +23,17 @@ class TheImage extends React.Component {
     this.resizeTimer = -1
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { resizeInterval } = this.props
     if (resizeInterval > 0) {
       this.resizeTimer = setInterval(this.resize, resizeInterval)
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { src } = this.props
-    const { src: nextSrc } = this.props
-    const isNewSrc = nextSrc && nextSrc !== src
+  componentDidUpdate(prevProps) {
+    const { src: prevSrc } = prevProps
+    const { src: src } = this.props
+    const isNewSrc = src && src !== prevSrc
     if (isNewSrc) {
       this.setState({
         failed: false,
@@ -42,25 +42,25 @@ class TheImage extends React.Component {
     }
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.setState({ loading: false })
     clearTimeout(this.resizeTimer)
   }
 
-  handleError (e) {
+  handleError(e) {
     const { onError } = this.props
     onError && onError(e)
     this.setState({ failed: true, loading: false })
   }
 
-  handleLoad (e) {
+  handleLoad(e) {
     const { onLoad } = this.props
     onLoad && onLoad(e)
     this.setState({ loading: false })
     this.resize()
   }
 
-  render () {
+  render() {
     const { props, state } = this
     const {
       alt,
@@ -82,32 +82,35 @@ class TheImage extends React.Component {
     const spinning = !!src && loading && !failed
     const notFound = !loading && (failed || !src)
     return (
-      <Wrap {...htmlAttributesFor(props, { except: ['className', 'width', 'height', 'src', 'draggable'] })}
-            {...eventHandlersFor(props, { except: [] })}
-            className={c('the-image', className, `the-image-${scale}`)}
-            style={Object.assign({}, style || {}, { background, height, width })}
-            {...asLinkProps}
-            aria-busy={spinning}
-            ref={this.elmRef}
+      <Wrap
+        {...htmlAttributesFor(props, {
+          except: ['className', 'width', 'height', 'src', 'draggable'],
+        })}
+        {...eventHandlersFor(props, { except: [] })}
+        className={c('the-image', className, `the-image-${scale}`)}
+        style={Object.assign({}, style || {}, { background, height, width })}
+        {...asLinkProps}
+        aria-busy={spinning}
+        ref={this.elmRef}
       >
-        <div className='the-image-inner'
-        >
+        <div className='the-image-inner'>
           {spinning && (
             <div className='the-image-spin'>
-              <TheIcon.Spin/>
+              <TheIcon.Spin />
             </div>
           )}
           {notFound ? (
             <span className='the-image-notfound'>{notFoundMessage}</span>
           ) : (
-            <img className={c('the-image-img', {
-              'the-image-img-failed': failed,
-            })}
-                 {...{ alt, draggable, src }}
-                 height={actualHeight || height}
-                 onError={this.handleError}
-                 onLoad={this.handleLoad}
-                 width={actualWidth || width}
+            <img
+              className={c('the-image-img', {
+                'the-image-img-failed': failed,
+              })}
+              {...{ alt, draggable, src }}
+              height={actualHeight || height}
+              onError={this.handleError}
+              onLoad={this.handleLoad}
+              width={actualWidth || width}
             />
           )}
           {children}
@@ -116,7 +119,7 @@ class TheImage extends React.Component {
     )
   }
 
-  resize () {
+  resize() {
     const elm = this.elmRef.current
     if (!elm) {
       return
@@ -129,7 +132,8 @@ class TheImage extends React.Component {
 
     const newActualWidth = elmRect && elmRect.width
     const newActualHeight = elmRect && elmRect.height
-    const skip = (actualWidth === newActualWidth) && (actualHeight === newActualHeight)
+    const skip =
+      actualWidth === newActualWidth && actualHeight === newActualHeight
     if (skip) {
       return
     }
@@ -147,9 +151,7 @@ TheImage.propTypes = {
   /** Image draggable */
   draggable: PropTypes.bool,
   /** Image height */
-  height: PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number
-  ]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /** Message when not found */
   notFoundMessage: PropTypes.string,
   /** Handler for failed event */
@@ -159,14 +161,8 @@ TheImage.propTypes = {
   /** Interval for resize */
   resizeInterval: PropTypes.number,
   /** How to scale image */
-  scale: PropTypes.oneOf([
-    'none',
-    'fit',
-    'fill'
-  ]),
-  width: PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number
-  ]),
+  scale: PropTypes.oneOf(['none', 'fit', 'fill']),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 TheImage.defaultProps = {

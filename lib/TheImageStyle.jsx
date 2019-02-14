@@ -8,9 +8,10 @@ import { TheStyle } from 'the-style'
 
 /** Style for TheImage */
 const TheImageStyle = ({ className, id, options }) => (
-  <TheStyle {...{ id }}
-            className={classnames('the-image-style', className)}
-            styles={TheImageStyle.data(options)}
+  <TheStyle
+    {...{ id }}
+    className={classnames('the-image-style', className)}
+    styles={TheImageStyle.data(options)}
   />
 )
 
