@@ -169,13 +169,15 @@
         "defaultValue": {
           "value": "'transparent'",
           "computed": false
-        }
+        },
+        "required": false
       },
       "role": {
         "defaultValue": {
           "value": "'image'",
           "computed": false
-        }
+        },
+        "required": false
       }
     }
   },

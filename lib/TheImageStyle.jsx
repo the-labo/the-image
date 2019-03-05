@@ -56,8 +56,11 @@ TheImageStyle.data = (options) => {
       width: 'auto',
     },
     '.the-image-notfound': {
+      alignItems: 'center',
       color: lightTextColor,
-      display: 'block',
+      display: 'flex',
+      height: '100%',
+      justifyContent: 'center',
       textAlign: 'center',
     },
     '.the-image-spin': {
@@ -81,8 +84,6 @@ TheImageStyle.data = (options) => {
     '.the-image.the-image-fill': {
       '.the-image-img': {
         boxSizing: 'border-box',
-        minHeight: '100%',
-        minWidth: '100%',
         objectFit: 'cover',
       },
     },

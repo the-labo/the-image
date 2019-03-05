@@ -93,15 +93,16 @@ class TheImage extends React.Component {
         aria-busy={spinning}
         ref={this.elmRef}
       >
-        <div className='the-image-inner'>
-          {spinning && (
-            <div className='the-image-spin'>
-              <TheIcon.Spin />
-            </div>
-          )}
-          {notFound ? (
-            <span className='the-image-notfound'>{notFoundMessage}</span>
-          ) : (
+        {notFound ? (
+          <span className='the-image-notfound'>{notFoundMessage}</span>
+        ) : (
+          <div className='the-image-inner'>
+            {spinning && (
+              <div className='the-image-spin'>
+                <TheIcon.Spin />
+              </div>
+            )}
+
             <img
               className={c('the-image-img', {
                 'the-image-img-failed': failed,
@@ -112,9 +113,9 @@ class TheImage extends React.Component {
               onLoad={this.handleLoad}
               width={actualWidth || width}
             />
-          )}
-          {children}
-        </div>
+            {children}
+          </div>
+        )}
       </Wrap>
     )
   }
